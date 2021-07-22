@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import psycopg2
 import os
 
-HOST = 'foodzilla.cn3sc8diz55z.us-east-2.rds.amazonaws.com'
+HOST = os.environ['DB_HOST']
 USER = 'foodzilla'
 PASS = os.environ['DB_PASS']
 DB = 'foodzilla'
