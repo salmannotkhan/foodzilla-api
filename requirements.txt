@@ -1,0 +1,9 @@
+asgiref
+click
+fastapi
+h11
+psycopg2
+pydantic
+starlette
+typing-extensions
+uvicorn
