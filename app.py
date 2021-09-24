@@ -62,24 +62,24 @@ def recipes(last_id: int = 0,
 
 
 @app.get("/recipe/{id}")
-def recipe(id: int):
+def recipe(recipe_id: int):
     con = psycopg2.connect(host=HOST, database=DB, user=USER, password=PASS)
     sql = 'SELECT JSON_AGG(RECIPE.*)AS json FROM RECIPE WHERE id = %s'
 
     with con.cursor() as cur:
-        cur.execute(sql, [id])
+        cur.execute(sql, [recipe_id])
         row = cur.fetchone()[0][0]
 
     return row
 
 
 @app.get("/recipe/{id}/ratings")
-def ratings(id: int):
+def ratings(recipe_id: int):
     con = psycopg2.connect(host=HOST, database=DB, user=USER, password=PASS)
     sql = """SELECT ARRAY(SELECT JSON_AGG(ratings.*)
             FROM ratings WHERE recipe_id= %s)"""
     with con.cursor() as cur:
-        cur.execute(sql, [id])
+        cur.execute(sql, [recipe_id])
         row = cur.fetchone()
 
     return row[0][0]
